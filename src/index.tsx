@@ -3,11 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
+import reducer from "./store/reducer"
+import { createStore, applyMiddleware, Store } from "redux"
+import { Provider } from "react-redux"
+import thunk from "redux-thunk"
+
+const store: Store<CountriesState, CountryAction> & {
+  dispatch: DispatchType
+} = createStore(reducer, applyMiddleware(thunk))
+
+const client = new ApolloClient({
+  uri: 'https://countries.trevorblades.com',
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <App />  
+    </ApolloProvider>,
+  </Provider>,
+  
   document.getElementById('root')
 );
 

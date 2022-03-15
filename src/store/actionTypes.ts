@@ -1,0 +1,1 @@
+export const NEW_COUNTRIES = "NEW_COUNTRIES"
