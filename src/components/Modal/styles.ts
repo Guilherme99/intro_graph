@@ -8,7 +8,7 @@ export const Container = styled.div`
   z-index:999;
   top: 0;
   left: 25%;
-  margin: 25% auto;
+  margin: 15% auto;
   border-radius: 25px;
   padding: 0 50px;
   text-align: center;  
