@@ -10,7 +10,7 @@ flex-direction: column;
 justify-content: center;
 margin: 0 auto;
 
-input[type=text], input[type=number], input[type=date], select {
+input[type=text], .masks, input[type=number], input[type=date], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -35,5 +35,14 @@ input[type=text], input[type=number], input[type=date], select {
   input[type=submit]:hover {
     background-color: #45a049;
   }
-  
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 `;

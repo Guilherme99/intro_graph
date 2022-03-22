@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, Store } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 
-const store: Store<CountriesState, CountryAction> & {
+const store: Store<UserState, UserAction> & {
   dispatch: DispatchType
 } = createStore(reducer, applyMiddleware(thunk))
 
