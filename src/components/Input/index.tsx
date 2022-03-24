@@ -74,7 +74,7 @@ const Input = ({ name, type, label, value, ...rest }: InputProps) => {
         {...rest}
       />
 
-      {error && <span>{error}</span>}
+      {error && <span style={{color: 'red'}}>{String(label).replace(':','')} obrigatório</span>}
     </div>
   )
 }

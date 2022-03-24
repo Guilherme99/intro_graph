@@ -50,7 +50,8 @@ const Select = ({ name, label, children, ...rest }: Props) => {
         {children}
       </select>
 
-      {error && <span className="error">{error}</span>}
+      {error && <span style={{color: 'red'}}>{String(label).replace(':','')} </span>}
+
     </div>
   )
 }

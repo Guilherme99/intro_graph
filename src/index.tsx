@@ -8,6 +8,7 @@ import reducer from "./store/reducer"
 import { createStore, applyMiddleware, Store } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store: Store<UserState, UserAction> & {
   dispatch: DispatchType

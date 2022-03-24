@@ -10,6 +10,11 @@ flex-direction: column;
 justify-content: center;
 margin: 0 auto;
 
+h1{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 input[type=text], .masks, input[type=number], input[type=date], select {
     width: 100%;
     padding: 12px 20px;

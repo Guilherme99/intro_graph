@@ -4,7 +4,6 @@ import {Container} from './styles'
 const Home: React.FC = () => {
   return (
       <Container>
-        <h1>Formulário de Vôo</h1>
         <SignupForm/>
       </Container>
   )

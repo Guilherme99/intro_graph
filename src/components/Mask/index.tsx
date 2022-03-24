@@ -40,7 +40,8 @@ const InputMask:React.FunctionComponent<Props> = ({className, placeHolder, label
         defaultValue={defaultValue}
         {...rest}
       />
-      {error && <span>{error}</span>}
+      {error && <span style={{color: 'red'}}>{error}</span>}
+
     </div>
   );
 };

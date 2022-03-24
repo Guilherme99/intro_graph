@@ -7,7 +7,7 @@ import { Form } from '@unform/web'
 import Select from '../Select';
 import Input from '../Input';
 import InputMask from '../Mask';
-import { useContinentQuery, useContinentsQuery } from '../../generated/graphql';
+import { useContinentsQuery } from '../../generated/graphql';
 import getValidationErrors from './../Errors';
 
 import { Dispatch } from "redux"
@@ -49,6 +49,7 @@ const SignUp = () => {
         cpf: Yup.string().required('CPF obrigatório'),
         age: Yup.number().required('idade obrigatório'),
         date: Yup.date().required('Data obrigatória'),
+        continent: Yup.string().required('Obrigatório'),
       });
       await schema.validate(values, {
         abortEarly: false,
@@ -59,8 +60,9 @@ const SignUp = () => {
       formRef.current?.clearField('date');
       formRef.current?.clearField('email');
      
-
-      navigate("/destinos", { state: { code: code }});
+      setTimeout(() => {
+        navigate("/destinos", { state: { code: code }});
+      },1000);
 
     } catch (err) {
       const errors = getValidationErrors(err as any);
@@ -70,6 +72,8 @@ const SignUp = () => {
 
   return (
     <Container>
+      <h1>Formulário de Voo</h1>
+
       <div>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input 
@@ -89,7 +93,7 @@ const SignUp = () => {
             placeholder='E-mail'
             label="E-mail:" name="email" type="text" />
 
-          <Select name="continent" label="Escolha seu continente" onChange={(e) => handleContinent(e)}>
+          <Select name="continent" label="Escolha seu continente" onChange={(e) => handleContinent(e)} >
             <option key={0} value={0}>
                 Selecione
               </option>

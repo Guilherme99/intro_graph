@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import Table from '../../components/Table'
 import { useSelector, shallowEqual } from "react-redux"
 import {Container} from './styles'
-import Modal from '../../components/Modal';
+import ContainerModal from '../../components/Modal';
 import { useLocation } from 'react-router-dom';
 import { useContinentQuery } from '../../generated/graphql';
+
+import { Spinner } from 'reactstrap';
+
 const Destinos: React.FC = () => {
 
   const user: IUser = useSelector(
     (state: UserState) => state.user,
     shallowEqual
   );
-
-  console.log(user)
   
   const [country, setCountry] = useState<any>();
   const [visible, setVisibled] = useState(false);
@@ -61,8 +62,11 @@ const Destinos: React.FC = () => {
       },
   ];
 
+  
   return loading ? (
-    <h2 style={{textAlign: 'center', fontSize: '20px'}}>carregando...</h2>
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'}}>
+      <Spinner/>
+    </div>
   )
   : (
     <>
@@ -73,7 +77,7 @@ const Destinos: React.FC = () => {
           <Table columns={columns} data={data?.continents[0]?.countries} />
         }
       </Container>
-      <Modal data={country} user={user} visibled={visible} setVisibled={setVisibled}/>
+      <ContainerModal data={country} user={user} visibled={visible} setVisibled={setVisibled}/>
     </>
   )
 }

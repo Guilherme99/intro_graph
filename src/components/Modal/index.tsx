@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { Container } from './styles';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 interface P {
     data: {
@@ -19,27 +18,49 @@ interface P {
     visibled: boolean,
     setVisibled: (value:boolean) => void
 }
-const Modal: React.FC<P> = ({data, user, visibled, setVisibled, ...props}): any => {
+const ContainerModal: React.FC<P> = ({data, user, visibled, setVisibled, ...props}): any => {
 
    const navigate = useNavigate();
    return (
-    visibled && <Container>
-            <h2>Resultado: </h2>
-            <h3>Nome: {user?.name} </h3>
-            <h3>Idade: {user?.age}</h3>
-            <h3>Data: {user?.date}</h3>
-            <h3>País: {data?.name}</h3>
-            <h3>Moeda: {data?.currency}</h3>
-            <h3>Código: {data?.code}</h3>
-
-            
-            <button className='btn' onClick={() => {
+        <Modal
+            isOpen={visibled}
+            toggle={() => {
                 setVisibled(false);
-                navigate('/');
-            }}>Fechar</button>
-        </Container>
-      ) 
+            }}
+        >
+            <ModalHeader toggle={() => {
+                setVisibled(false);
+            }}>
+            Informações
+            </ModalHeader>
+            <ModalBody>
+                <h5>Nome:   <span>{user?.name} </span> </h5>  
+                <h5>Idade:  <span>{user?.age}</span> </h5>
+                <h5>Data:   <span>{user?.date}</span> </h5>
+                <h5>País:   <span>{data?.name}</span> </h5>
+                <h5>Moeda:  <span>{data?.currency ?? 'Não encontrada'}</span> </h5>
+                <h5>Código: <span>{data?.code ?? 'Não encontrada'}</span> </h5>
+            </ModalBody>
+            <ModalFooter>
+            <Button
+                color="primary"
+                onClick={() => {
+                    setVisibled(false);
+                    navigate('/');
+                }}
+            >
+                Ir para a home
+            </Button>
+            {' '}
+            <Button onClick={() => {
+                setVisibled(false);
+            }}>
+                Cancelar
+            </Button>
+            </ModalFooter>
+        </Modal>
+      );
   
 }
 
-export default Modal;
+export default ContainerModal;
