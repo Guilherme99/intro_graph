@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, ReactNode, SelectHTMLAttributes } from 'react'
 
-import { useField, SubmitHandler, FormHandles } from '@unform/core'
-import { Form } from '@unform/web'
+import { useField } from '@unform/core'
 
 interface SelectProps {
   name: string
