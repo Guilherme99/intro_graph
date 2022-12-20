@@ -69,7 +69,7 @@ const SignUp = () => {
       <div>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input 
-            placeholder='Data'
+            placeholder='Nome'
             label="Nome:" name="name" />
           <Input 
             placeholder='Idade'
@@ -80,7 +80,7 @@ const SignUp = () => {
             name="date"
             type="date"
           />
-          <Select name="continent" label="Choose your continent" onChange={(e) => handleContinent(e)}>
+          <Select name="continent" label="Escolha um continente" onChange={(e) => handleContinent(e)}>
             <option key={0} value={0}>
                 Selecione
               </option>
