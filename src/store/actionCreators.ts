@@ -1,15 +1,15 @@
 import * as actionTypes from "./actionTypes"
 
-export function newContries(countries: CountriesState) {
-  const action: CountryAction = {
-    type: actionTypes.NEW_COUNTRIES,
-    countries,
+export function newUser(user: UserState) {
+  const action: UserAction = {
+    type: actionTypes.NEW_USER,
+    user,
   }
 
   return simulateHttpRequest(action)
 }
 
-export function simulateHttpRequest(action: CountryAction) {
+export function simulateHttpRequest(action: UserAction) {
   return (dispatch: DispatchType) => {
     setTimeout(() => {
       dispatch(action)

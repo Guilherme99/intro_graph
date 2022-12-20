@@ -1,16 +1,18 @@
 import React, { useRef, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 import { SubmitHandler, FormHandles } from '@unform/core'
 import * as Yup from 'yup';
 import { Form } from '@unform/web'
 import Select from '../Select';
 import Input from '../Input';
-import { useContinentQuery, useContinentsQuery } from '../../generated/graphql';
+import InputMask from '../Mask';
+import { useContinentsQuery } from '../../generated/graphql';
 import getValidationErrors from './../Errors';
 
 import { Dispatch } from "redux"
 import { useDispatch } from 'react-redux';
-import { newContries } from '../../store/actionCreators';
+import { newUser } from '../../store/actionCreators';
 
 import {Container} from './style'
 interface FormData {
@@ -22,21 +24,16 @@ interface FormData {
 }
 
 const SignUp = () => {
-  const formRef = useRef<FormHandles>(null)
-  const [code, setCode] = useState<string>();
-  const { data, refetch }  = useContinentQuery({
-   variables: { code: String(code) },
-  });
 
+  let navigate = useNavigate();
   const dispatch: Dispatch<any> = useDispatch()
 
+  const formRef = useRef<FormHandles>(null)
+  
+  const [code, setCode] = useState<string>();
 
   const continents = useContinentsQuery().data?.continents; 
   
-  React.useEffect(() => {
-    refetch({ code: String(code) });
-  }, [refetch, code]);
-
   const handleContinent = (value: React.ChangeEvent<HTMLSelectElement>) => {
     const code = value.target.value;
     if(code !== '0'){
@@ -48,16 +45,25 @@ const SignUp = () => {
     try {
       const schema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatório'),
-        age: Yup.number().positive().required('idade obrigatório'),
+        email: Yup.string().email().required('E-mail obrigatório'),
+        cpf: Yup.string().required('CPF obrigatório'),
+        age: Yup.number().required('idade obrigatório'),
         date: Yup.date().required('Data obrigatória'),
+        continent: Yup.string().required('Obrigatório'),
       });
       await schema.validate(values, {
         abortEarly: false,
       });
-      dispatch(newContries(data?.continents[0].countries as any));
+      dispatch(newUser(values as any));
       formRef.current?.clearField('name');
       formRef.current?.clearField('age');
       formRef.current?.clearField('date');
+      formRef.current?.clearField('email');
+     
+      setTimeout(() => {
+        navigate("/destinos", { state: { code: code }});
+      },1000);
+
     } catch (err) {
       const errors = getValidationErrors(err as any);
       formRef.current?.setErrors(errors);
@@ -66,6 +72,8 @@ const SignUp = () => {
 
   return (
     <Container>
+      <h1>Formulário de Voo</h1>
+
       <div>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input 
@@ -80,7 +88,12 @@ const SignUp = () => {
             name="date"
             type="date"
           />
-          <Select name="continent" label="Escolha um continente" onChange={(e) => handleContinent(e)}>
+          <InputMask placeHolder='000.000.000-00' className="masks" label='CPF:' name="cpf" mask='999.999.999-99'/>
+          <Input
+            placeholder='E-mail'
+            label="E-mail:" name="email" type="text" />
+
+          <Select name="continent" label="Escolha seu continente" onChange={(e) => handleContinent(e)} >
             <option key={0} value={0}>
                 Selecione
               </option>
@@ -90,7 +103,7 @@ const SignUp = () => {
               </option>
             ))}
           </Select>
-          <button type="submit">Submit</button>
+          <button type="submit">Enviar</button>
         </Form>
       </div>
 

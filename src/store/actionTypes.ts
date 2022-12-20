@@ -1,1 +1,1 @@
-export const NEW_COUNTRIES = "NEW_COUNTRIES"
+export const NEW_USER = "NEW_USER"

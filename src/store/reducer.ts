@@ -1,16 +1,22 @@
 import * as actionTypes from "./actionTypes"
 
-const initialState: CountriesState = {
-  countries: [],
+const initialState: UserState = {
+  user: {
+    age: 0,
+    cpf: '',
+    date: '',
+    email: '',
+    name: '',
+  },
 };
 
 const reducer = (
-  state: CountriesState = initialState,
-  action: CountryAction
-): CountriesState => {
+  state: UserState = initialState,
+  action: UserAction
+): UserState => {
   switch (action.type) {
-    case actionTypes.NEW_COUNTRIES:
-		state = Object.assign({}, state, { countries: action.countries });
+    case actionTypes.NEW_USER:
+		state = Object.assign({}, state, { user: action.user });
 	break;
 }
   return state

@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, InputHTMLAttributes } from 'react'
 
-import { useField, SubmitHandler, FormHandles } from '@unform/core'
-import { Form } from '@unform/web'
+import { useField } from '@unform/core'
 
 /**
  * This input component supports many <input> types, including:
@@ -74,7 +73,7 @@ const Input = ({ name, type, label, value, ...rest }: InputProps) => {
         {...rest}
       />
 
-      {error && <span>{error}</span>}
+      {error && <span style={{color: 'red'}}>{String(label).replace(':','')} obrigatório</span>}
     </div>
   )
 }

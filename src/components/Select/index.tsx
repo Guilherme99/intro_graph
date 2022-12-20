@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, ReactNode, SelectHTMLAttributes } from 'react'
 
-import { useField, SubmitHandler, FormHandles } from '@unform/core'
-import { Form } from '@unform/web'
+import { useField } from '@unform/core'
 
 interface SelectProps {
   name: string
@@ -50,7 +49,8 @@ const Select = ({ name, label, children, ...rest }: Props) => {
         {children}
       </select>
 
-      {error && <span className="error">{error}</span>}
+      {error && <span style={{color: 'red'}}>{String(label).replace(':','')} </span>}
+
     </div>
   )
 }
